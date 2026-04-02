@@ -1,8 +1,12 @@
-import React from 'react';
+// File: src/App.jsx
+import React, { useState } from 'react';
 import './App.css';
+import AuthModal from './Components/SignUpForm.jsx'; // Import Component vừa tạo
 
 function App() {
-  // Dữ liệu mẫu (Mock data) cho các sản phẩm điện tử
+  const [cartCount, setCartCount] = useState(0);
+  const [showAuthModal, setShowAuthModal] = useState(false);
+
   const products = [
     {
       id: 1,
@@ -16,7 +20,7 @@ function App() {
       name: 'Smartphone Ultra 5G',
       price: '18.500.000₫',
       category: 'Điện thoại',
-      image: 'https://images.unsplash.com/photo-1610945264803-c22b62d2a7b3?auto=format&fit=crop&w=500&q=60'
+      image: 'https://images.unsplash.com/photo-1688762473728-3a20023e1fe4?auto=format&fit=crop&w=500&q=60'
     },
     {
       id: 3,
@@ -34,9 +38,20 @@ function App() {
     }
   ];
 
+  const handleAddToCart = (productName) => {
+    setCartCount(cartCount + 1);
+    alert(`Đã thêm "${productName}" vào giỏ hàng thành công!`);
+  };
+
+  const handleShopNowClick = () => {
+    const productSection = document.getElementById('product-list');
+    if (productSection) {
+      productSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="app-container">
-      {/* Header / Navbar */}
       <header className="navbar">
         <div className="logo">TechShop</div>
         <nav className="nav-links">
@@ -45,18 +60,23 @@ function App() {
           <a href="#">Khuyến mãi</a>
           <a href="#">Liên hệ</a>
         </nav>
-        <div className="cart-btn">🛒 Giỏ hàng (0)</div>
+        <div className="cart-btn">🛒 Giỏ hàng ({cartCount})</div>
+        {/* Nút mở Modal */}
+        <div 
+          className="login-btn" 
+          onClick={() => setShowAuthModal(true)}
+        > 
+          Đăng nhập/Đăng ký
+        </div>
       </header>
 
-      {/* Banner */}
       <section className="banner">
         <h1>Thế Giới Công Nghệ Đỉnh Cao</h1>
         <p>Khám phá những thiết bị điện tử mới nhất với giá cực ưu đãi.</p>
-        <button className="cta-btn">Mua sắm ngay</button>
+        <button className="cta-btn" onClick={handleShopNowClick}>Mua sắm ngay</button>
       </section>
 
-      {/* Danh sách sản phẩm */}
-      <main className="product-section">
+      <main id="product-list" className="product-section">
         <h2 className="section-title">Sản Phẩm Nổi Bật</h2>
         <div className="product-grid">
           {products.map((product) => (
@@ -68,17 +88,26 @@ function App() {
               <div className="product-info">
                 <h3 className="product-name">{product.name}</h3>
                 <p className="product-price">{product.price}</p>
-                <button className="add-to-cart-btn">Thêm vào giỏ</button>
+                <button 
+                  className="add-to-cart-btn" 
+                  onClick={() => handleAddToCart(product.name)}
+                >
+                  Thêm vào giỏ
+                </button>
               </div>
             </div>
           ))}
         </div>
       </main>
 
-      {/* Footer */}
       <footer className="footer">
         <p>&copy; 2026 TechShop. Bản quyền thuộc về bạn.</p>
       </footer>
+
+      {/* Gọi Component Modal. Truyền vào prop onClose để modal tự biết cách báo App đóng nó đi */}
+      {showAuthModal && (
+        <AuthModal onClose={() => setShowAuthModal(false)} />
+      )}
     </div>
   );
 }
