@@ -2,10 +2,9 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form'; // Import hook
 
-function AuthModal({ onClose }) {
+function AuthModal({ onClose, onLogin }) {
   const [isLoginMode, setIsLoginMode] = useState(true);
 
-  // Khởi tạo useForm
   const { 
     register,     // Dùng để đăng ký các thẻ input vào hook
     handleSubmit, // Hàm bọc ngoài để xử lý khi bấm submit
@@ -14,16 +13,60 @@ function AuthModal({ onClose }) {
   } = useForm();
 
   // Hàm xử lý khi người dùng nhập đúng và bấm Submit
-  const onSubmit = (data) => {
-    // data sẽ tự động chứa các giá trị input (ví dụ: data.email, data.password)
-    console.log("Dữ liệu form:", data); 
+  // Nhớ thêm chữ "async" trước (data) nhé
+  const onSubmit = async (data) => {
+    try {
+      if (isLoginMode) {
+        // 1. XỬ LÝ ĐĂNG NHẬP (Lấy dữ liệu từ file JSON ra check)
+        // Gọi API để tìm user có email và password khớp với người dùng nhập
+        const response = await fetch(`http://localhost:8000/users?email=${data.email}&password=${data.password}`);
+        const users = await response.json(); // Chuyển kết quả về dạng mảng
 
-    if (isLoginMode) {
-      alert(`Đăng nhập thành công với email: ${data.email}`);
-    } else {
-      alert(`Đăng ký thành công tài khoản: ${data.fullName}`);
+        // Nếu mảng users lớn hơn 0, nghĩa là tìm thấy tài khoản
+        if (users.length > 0) {
+          const loggedInUser = users[0]; // Lấy tài khoản đầu tiên tìm được
+          alert(`Đăng nhập thành công! Chào mừng ${loggedInUser.fullName}`);
+          onLogin(loggedInUser.fullName); // Báo cho App biết đã đăng nhập
+          onClose(); // Đóng form
+        } else {
+          // Nếu mảng rỗng nghĩa là sai email hoặc mật khẩu
+          alert("Email hoặc mật khẩu không chính xác!");
+        }
+
+      } else {
+        // 2. XỬ LÝ ĐĂNG KÝ (Ghi dữ liệu vào file JSON)
+        // (Tùy chọn) Kiểm tra xem email đã tồn tại chưa
+        const checkEmailRes = await fetch(`http://localhost:8000/users?email=${data.email}`);
+        const existingUsers = await checkEmailRes.json();
+        
+        if (existingUsers.length > 0) {
+          alert("Email này đã được sử dụng! Vui lòng chọn email khác.");
+          return; // Dừng lại không đăng ký nữa
+        }
+
+        // Dùng lệnh POST để lưu tài khoản mới vào file JSON
+        const response = await fetch('http://localhost:8000/users', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            fullName: data.fullName,
+            email: data.email,
+            password: data.password
+          })
+        });
+
+        if (response.ok) {
+          alert("Đăng ký thành công! Vui lòng đăng nhập.");
+          setIsLoginMode(true); // Tự động chuyển form sang chế độ Đăng nhập
+          reset(); // Xóa trắng các ô input
+        }
+      }
+    } catch (error) {
+      console.error("Lỗi hệ thống:", error);
+      alert("Không thể kết nối đến máy chủ. Bạn đã bật json-server chưa?");
     }
-    onClose(); 
   };
 
   // Hàm chuyển đổi Đăng nhập / Đăng ký

@@ -1,0 +1,11 @@
+{
+  "users": [
+    {
+      "fullName": "Phạm Minh Sáng",
+      "email": "sang62375@gmail.com",
+      "password": "Iloveyou1207",
+      "id": "JHuonVt3bJE"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

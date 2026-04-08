@@ -1,4 +1,6 @@
-/* Khởi tạo biến màu sắc và reset cơ bản */
+/* =========================================
+   1. BIẾN MÀU SẮC & RESET CƠ BẢN
+   ========================================= */
 :root {
   --primary-color: #2563eb;
   --secondary-color: #1e40af;
@@ -21,7 +23,69 @@ body {
   color: var(--text-dark);
 }
 
-/* NAVBAR */
+/* =========================================
+   2. TIỆN ÍCH CHUNG (UTILITIES)
+   ========================================= */
+.section-title {
+  text-align: center;
+  margin-bottom: 3rem;
+  font-size: 2rem;
+  color: var(--text-dark);
+}
+
+.badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 0.2rem 0.6rem;
+  font-size: 0.8rem;
+  border-radius: 20px;
+  font-weight: bold;
+  color: var(--text-dark);
+}
+
+.error-text {
+  color: #ef4444;
+  font-size: 0.85rem;
+  margin-top: 0.2rem;
+}
+
+/* --- TOOLTIP TÙY CHỈNH --- */
+.has-tooltip {
+  position: relative; 
+}
+
+.has-tooltip::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: 110%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(17, 24, 39, 0.9);
+  color: #ffffff;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  font-weight: 500;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.has-tooltip:hover::after {
+  opacity: 1;
+  visibility: visible;
+  top: 125%; /* Đã sửa lỗi thiếu dấu % ở đây */
+}
+
+/* =========================================
+   3. BỐ CỤC CHÍNH (HEADER & FOOTER)
+   ========================================= */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -52,25 +116,79 @@ body {
   color: var(--primary-color);
 }
 
-.cart-btn {
+/* Các nút trên Navbar */
+.login-btn {
+  font-weight: 600;
+  color: var(--primary-color);
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--primary-color);
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.login-btn:hover {
   background-color: var(--primary-color);
   color: var(--white);
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: bold;
 }
 
-.login-btn {
-  background-color: var(--third-color);
+.cart-btn {
+  font-weight: 600;
+  color: var(--third-color);
+  background-color: var(--primary-color);
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--primary-color);
+  border-radius: 5px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.cart-btn:hover {
+  background-color: var(--primary-color);
   color: var(--white);
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: bold;
 }
 
-/* BANNER */
+/* Trạng thái đã đăng nhập */
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-name {
+  font-weight: bold;
+  color: var(--text-dark);
+}
+
+.logout-btn {
+  font-size: 0.9rem;
+  color: #ef4444;
+  cursor: pointer;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid #ef4444;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+  background-color: #ef4444;
+  color: white;
+}
+
+.footer {
+  text-align: center;
+  padding: 2rem;
+  background-color: #111827;
+  color: var(--text-light);
+  margin-top: 2rem;
+}
+
+/* =========================================
+   4. TRANG CHỦ & DANH SÁCH SẢN PHẨM
+   ========================================= */
 .banner {
   text-align: center;
   padding: 5rem 2rem;
@@ -104,26 +222,17 @@ body {
   background-color: #d97706;
 }
 
-/* PRODUCT SECTION & GRID */
 .product-section {
   padding: 4rem 5%;
 }
 
-.section-title {
-  text-align: center;
-  margin-bottom: 3rem;
-  font-size: 2rem;
-  color: var(--text-dark);
-}
-
 .product-grid {
   display: grid;
-  /* Lưới Responsive: Cột sẽ tự căn chỉnh dựa trên chiều rộng màn hình */
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
 }
 
-/* PRODUCT CARD */
+/* Product Card */
 .product-card {
   background-color: var(--white);
   border-radius: 10px;
@@ -154,18 +263,6 @@ body {
   transform: scale(1.05);
 }
 
-.badge {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background-color: rgba(255, 255, 255, 0.9);
-  padding: 0.2rem 0.6rem;
-  font-size: 0.8rem;
-  border-radius: 20px;
-  font-weight: bold;
-  color: var(--text-dark);
-}
-
 .product-info {
   padding: 1.5rem;
   text-align: center;
@@ -184,49 +281,231 @@ body {
   margin-bottom: 1rem;
 }
 
-.add-to-cart-btn {
+/* Cụm nút trong Card Sản phẩm */
+.product-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
+}
+
+.view-detail-btn, .add-to-cart-btn {
+  flex: 1;
   padding: 0.7rem;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-align: center;
+}
+
+.view-detail-btn {
+  margin-right: 10px;
   border: 1px solid var(--primary-color);
   background-color: transparent;
   color: var(--primary-color);
-  font-weight: bold;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: all 0.3s;
+}
+
+.view-detail-btn:hover {
+  background-color: var(--primary-color);
+  color: #ffffff;
+}
+
+.add-to-cart-btn {
+  border: 1px solid var(--primary-color);
+  background-color: var(--primary-color);
+  color: #ffffff;
 }
 
 .add-to-cart-btn:hover {
-  background-color: var(--primary-color);
-  color: var(--white);
+  opacity: 0.8;
 }
 
-/* FOOTER */
-.footer {
+/* Nút Xem Tiếp */
+.load-more-container {
   text-align: center;
-  padding: 2rem;
-  background-color: #111827;
-  color: var(--text-light);
-  margin-top: 2rem;
+  margin-top: 3rem;
 }
 
-/* --- Nút Đăng nhập trên Navbar --- */
-.login-btn {
-  font-weight: 600;
+.continue-products {
+  padding: 0.8rem 2.5rem;
+  background-color: transparent;
   color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+  border-radius: 30px;
+  font-size: 1.1rem;
+  font-weight: bold;
   cursor: pointer;
-  padding: 0.5rem 1rem;
-  border: 1px solid var(--primary-color);
-  border-radius: 5px;
   transition: all 0.3s ease;
 }
 
-.login-btn:hover {
+.continue-products:hover {
   background-color: var(--primary-color);
   color: var(--white);
 }
 
-/* --- MODAL STYLES --- */
+/* =========================================
+   5. TRANG CHI TIẾT SẢN PHẨM
+   ========================================= */
+.product-detail-container {
+  padding: 4rem 5%;
+  display: flex;
+  gap: 4rem;
+  flex-wrap: wrap;
+  min-height: 70vh;
+}
+
+.product-detail-image-wrapper {
+  flex: 1 1 400px;
+}
+
+.product-detail-image {
+  width: 100%;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  object-fit: cover;
+}
+
+.product-detail-info {
+  flex: 1 1 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.product-detail-badge {
+  align-self: flex-start;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.product-detail-title {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--text-dark, #1f2937); 
+}
+
+.product-detail-price {
+  font-size: 2.2rem;
+  color: var(--primary-color, #ef4444);
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+.product-detail-description {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: #4b5563;
+  margin-bottom: 2.5rem;
+}
+
+.product-detail-actions {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.btn-large {
+  padding: 1rem 2.5rem;
+  font-size: 1.2rem;
+  margin-top: 0;
+  border-radius: 8px;
+}
+
+/* =========================================
+   6. TRANG GIỎ HÀNG
+   ========================================= */
+.cart-page-container {
+  padding: 4rem 5%;
+  text-align: center;
+  min-height: 60vh;
+}
+
+.empty-cart-message {
+  margin: 2rem 0;
+}
+
+.empty-cart-image {
+  width: 150px;
+  margin-top: 1rem;
+  opacity: 0.5;
+}
+
+.empty-cart-link {
+  text-decoration: none;
+  display: inline-block;
+}
+
+.cart-items-container {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.cart-item-row {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 1rem 0;
+}
+
+.cart-item-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.cart-item-info {
+  flex: 1;
+}
+
+.cart-item-title {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: #1f2937;
+}
+
+.cart-item-price {
+  color: var(--primary-color, #ef4444);
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.cart-remove-btn {
+  padding: 0.5rem 1rem;
+  background-color: #f3f4f6;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: var(--primary-color, #ef4444);
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.cart-remove-btn:hover {
+  background-color: #fee2e2;
+}
+
+.cart-checkout-container {
+  margin-top: 2rem;
+  text-align: right;
+}
+
+.checkout-btn {
+  background-color: #10b981;
+  border-color: #10b981;
+}
+
+.checkout-btn:hover {
+  background-color: #059669;
+  border-color: #059669;
+}
+
+/* =========================================
+   7. MODAL ĐĂNG NHẬP / ĐĂNG KÝ
+   ========================================= */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -237,8 +516,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000; /* Đảm bảo modal luôn nằm trên cùng */
-  backdrop-filter: blur(3px); /* Làm mờ background nhẹ */
+  z-index: 1000;
+  backdrop-filter: blur(3px);
 }
 
 .modal-content {
@@ -252,7 +531,6 @@ body {
   animation: slideDown 0.3s ease-out;
 }
 
-/* Hiệu ứng trượt xuống mượt mà khi mở Modal */
 @keyframes slideDown {
   from {
     opacity: 0;
@@ -275,7 +553,7 @@ body {
 }
 
 .close-btn:hover {
-  color: #ef4444; /* Đổi màu đỏ khi di chuột vào nút tắt */
+  color: #ef4444;
 }
 
 .modal-content h2 {
@@ -350,9 +628,51 @@ body {
   color: var(--secondary-color);
 }
 
-/* Thêm vào cuối file src/App.css */
-.error-text {
-  color: #ef4444; /* Màu đỏ */
-  font-size: 0.85rem;
-  margin-top: 0.2rem;
+/* =========================================
+   8. RESPONSIVE GIAO DIỆN ĐIỆN THOẠI
+   (Luôn đặt ở dưới cùng file)
+   ========================================= */
+@media screen and (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .nav-links a {
+    margin: 0.5rem;
+    font-size: 0.95rem;
+  }
+
+  .banner {
+    padding: 3rem 1rem;
+  }
+
+  .banner h1 {
+    font-size: 1.8rem;
+  }
+
+  .banner p {
+    font-size: 1rem;
+  }
+
+  .product-section {
+    padding: 2rem 5%;
+  }
+
+  .modal-content {
+    padding: 1.5rem;
+    width: 95%;
+  }
+
+  .user-profile {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
 }
