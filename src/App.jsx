@@ -1,12 +1,15 @@
-
 import React, { useState } from 'react';
 import { Routes, Route, Link } from 'react-router-dom'; 
 import './App.css';
-import AuthModal from './Components/SignUpForm.jsx'; 
+
 import ProductsPage from './Page/ProductsPage.jsx'; 
 import HomePage from './Page/HomePage.jsx'; 
 import CartPage from './Page/CartPage.jsx';
+import CheckOutPage from './Page/CheckOutPage.jsx';
+
+import AuthModal from './Components/SignUpForm.jsx'; 
 import ProductDetail from './Components/ProductDetail.jsx';
+
 import { GetProducts } from './data/Products.js';
 
 function App() {
@@ -22,25 +25,26 @@ function App() {
     alert(`Đã thêm "${product.name}" vào giỏ hàng thành công!`);
   };
 
-
   const handleLoginSuccess = (userName) => {
-    setCurrentUser(userName); // Lưu tên người dùng
+    setCurrentUser(userName); 
+  };
+
+  const clearCart = () => {
+    setCartItems([]); 
   };
 
   const handleLogout = () => {
-    setCurrentUser(null); // Xóa thông tin người dùng
+    setCurrentUser(null); 
     alert("Bạn đã đăng xuất thành công!");
   };
 
   return (
     <div className="app-container">
       <header className="navbar">
-        {/* Dùng Link thay cho the div hay the a */}
         <Link to="/" className="logo" style={{ textDecoration: 'none' }}>
           TechShop
         </Link>
         <nav className="nav-links">
-          {/* Thay thẻ <a href="..."> bằng <Link to="..."> */}
           <Link to="/">Trang chủ</Link>
           <Link to="/products">Sản phẩm</Link>
           <Link to="/promotion">Khuyến mãi</Link>
@@ -61,7 +65,6 @@ function App() {
         )}
       </header>
 
-      {/* KHU VỰC THAY ĐỔI THEO URL */}
       <Routes>
         <Route 
           path="/" 
@@ -77,6 +80,16 @@ function App() {
         />
         <Route 
           path="/product/:id" element={<ProductDetail onAddToCart={handleAddToCart} />} 
+        />
+        <Route 
+          path="/checkout" 
+          element={
+            <CheckOutPage 
+              cartItems={cartItems} 
+              clearCart={clearCart} 
+              currentUser={currentUser} 
+            />
+          } 
         />
       </Routes>
 

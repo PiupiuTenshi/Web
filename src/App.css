@@ -1,6 +1,3 @@
-/* =========================================
-   1. BIẾN MÀU SẮC & RESET CƠ BẢN
-   ========================================= */
 :root {
   --primary-color: #2563eb;
   --secondary-color: #1e40af;
@@ -80,7 +77,7 @@ body {
 .has-tooltip:hover::after {
   opacity: 1;
   visibility: visible;
-  top: 125%; /* Đã sửa lỗi thiếu dấu % ở đây */
+  top: 125%; 
 }
 
 /* =========================================
@@ -629,9 +626,88 @@ body {
 }
 
 /* =========================================
-   8. RESPONSIVE GIAO DIỆN ĐIỆN THOẠI
-   (Luôn đặt ở dưới cùng file)
+   TRANG THANH TOÁN (CHECKOUT)
    ========================================= */
+.checkout-container {
+  min-height: 70vh;
+}
+
+.checkout-layout {
+  display: flex;
+  gap: 3rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  align-items: flex-start;
+}
+
+.checkout-form-section {
+  flex: 3;
+  background-color: var(--white);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.checkout-summary-section {
+  flex: 2;
+  background-color: #f8fafc;
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  position: sticky;
+  top: 100px; /* Giúp cột tóm tắt trượt theo khi cuộn form */
+}
+
+.checkout-summary-items {
+  margin-top: 1.5rem;
+  max-height: 300px;
+  overflow-y: auto;
+  border-bottom: 2px dashed #cbd5e1;
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.summary-item {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.summary-item img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.summary-name {
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  margin-bottom: 0.2rem;
+}
+
+.summary-price {
+  font-weight: bold;
+  color: var(--primary-color);
+  font-size: 0.9rem;
+}
+
+.checkout-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.total-amount {
+  font-size: 1.5rem;
+  color: #10b981; /* Màu xanh lá cho tổng tiền */
+}
+
+ /* GIAO DIỆN ĐIỆN THOẠI */
+
 @media screen and (max-width: 768px) {
   .navbar {
     flex-direction: column;
@@ -674,5 +750,9 @@ body {
   .user-profile {
     flex-direction: column;
     gap: 0.5rem;
+  }
+
+  .checkout-layout {
+    flex-direction: column-reverse; /* Đẩy giỏ hàng lên trên form trên điện thoại */
   }
 }

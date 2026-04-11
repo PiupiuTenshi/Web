@@ -1,75 +1,67 @@
-// File: src/Components/Cart.jsx
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+// File: src/Page/CartPage.jsx
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 function CartPage({ cartItems }) {
+  const navigate = useNavigate();
 
-    return (
-    <main className="product-section" style={{ padding: '4rem 5%', textAlign: 'center' }}>
+  return (
+    <main className="product-section cart-page-container">
       <h2 className="section-title">Giỏ Hàng Của Bạn</h2>
+      
       {cartItems.length === 0 ? (
         <>
-          <div style={{ margin: '2rem 0' }}>
+          <div className="empty-cart-message">
             <p>Hiện tại chưa có sản phẩm nào trong giỏ hàng.</p>
             <img 
               src="https://cdn-icons-png.flaticon.com/512/11329/11329973.png" 
               alt="Empty Cart" 
-              style={{ width: '150px', marginTop: '1rem', opacity: 0.5 }}
+              className="empty-cart-image"
             />
           </div>
-          <Link to="/products" className="cta-btn" style={{ textDecoration: 'none', display: 'inline-block' }}>
+          <Link to="/products" className="cta-btn empty-cart-link">
               Tiếp tục mua sắm
           </Link>
         </>
       ) : (
-        <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'left' }}>
+        <div className="cart-items-container">
           
           {cartItems.map((item, index) => (
-            <div key={index} style={{ 
-              display: 'flex', 
-              alignItems: 'center', 
-              gap: '1.5rem', 
-              borderBottom: '1px solid #e5e7eb', 
-              padding: '1rem 0' 
-            }}>
+            <div key={index} className="cart-item-row">
               {/* Hình ảnh sản phẩm */}
               <img 
                 src={item.image} 
                 alt={item.name} 
-                style={{ width: '100px', height: '100px', objectFit: 'cover', borderRadius: '8px' }} 
+                className="cart-item-image"
               />
               
               {/* Thông tin sản phẩm */}
-              <div style={{ flex: 1 }}>
-                <h3 style={{ fontSize: '1.2rem', marginBottom: '0.5rem', color: '#1f2937' }}>
+              <div className="cart-item-info">
+                <h3 className="cart-item-title">
                   {item.name}
                 </h3>
-                <p style={{ color: '#ef4444', fontWeight: 'bold', fontSize: '1.1rem' }}>
+                <p className="cart-item-price">
                   {item.price}
                 </p>
               </div>
               
-              {/* Nút xóa (Hiện tại để cho đẹp, sau này bạn có thể code thêm chức năng xóa) */}
-              <button style={{ 
-                padding: '0.5rem 1rem', 
-                backgroundColor: '#f3f4f6', 
-                border: 'none', 
-                borderRadius: '5px', 
-                cursor: 'pointer',
-                color: '#ef4444',
-                fontWeight: 'bold'
-              }}>
+              {/* Nút xóa */}
+              <button className="cart-remove-btn">
                 Xóa
               </button>
             </div>
           ))}
 
-          {/* Nút thanh toán tổng */}
-          <div style={{ marginTop: '2rem', textAlign: 'right' }}>
-             <button className="cta-btn" style={{ backgroundColor: '#10b981' }}>
+          {/* Khu vực thanh toán */}
+          <div className="cart-checkout-container">
+             <button 
+               className="cta-btn checkout-btn"
+               onClick={() => navigate('/checkout')} 
+             >
                 Tiến hành thanh toán
              </button>
           </div>
+          
         </div>
       )}
     </main>

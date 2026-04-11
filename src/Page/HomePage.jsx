@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { useNavigate } from 'react-router-dom'; // 👈 Dùng để chuyển trang bằng code
+import { useNavigate } from 'react-router-dom'; 
 import Products from '../Components/Products.jsx';
 
 function HomePage({ products, onAddToCart }) {
