@@ -25,7 +25,7 @@ function CheckoutPage({ cartItems = [], clearCart, currentUser }) {
     };
 
     try {
-      const response = await fetch('http://localhost:8000/orders', {
+      const response = await fetch('https://lnpdp9rp-8000.asse.devtunnels.ms/orders', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newOrder)

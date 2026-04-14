@@ -19,14 +19,14 @@ function AuthModal({ onClose, onLogin }) {
       if (isLoginMode) {
         // 1. XỬ LÝ ĐĂNG NHẬP (Lấy dữ liệu từ file JSON ra check)
         // Gọi API để tìm user có email và password khớp với người dùng nhập
-        const response = await fetch(`http://localhost:8000/users?email=${data.email}&password=${data.password}`);
+        const response = await fetch(`https://lnpdp9rp-8000.asse.devtunnels.ms/users?email=${data.email}&password=${data.password}`);
         const users = await response.json(); // Chuyển kết quả về dạng mảng
 
         // Nếu mảng users lớn hơn 0, nghĩa là tìm thấy tài khoản
         if (users.length > 0) {
           const loggedInUser = users[0]; // Lấy tài khoản đầu tiên tìm được
           alert(`Đăng nhập thành công! Chào mừng ${loggedInUser.fullName}`);
-          onLogin(loggedInUser.fullName); // Báo cho App biết đã đăng nhập
+          onLogin(loggedInUser); // Báo cho App biết đã đăng nhập
           onClose(); // Đóng form
         } else {
           // Nếu mảng rỗng nghĩa là sai email hoặc mật khẩu
@@ -36,7 +36,7 @@ function AuthModal({ onClose, onLogin }) {
       } else {
         // 2. XỬ LÝ ĐĂNG KÝ (Ghi dữ liệu vào file JSON)
         // (Tùy chọn) Kiểm tra xem email đã tồn tại chưa
-        const checkEmailRes = await fetch(`http://localhost:8000/users?email=${data.email}`);
+        const checkEmailRes = await fetch(`https://lnpdp9rp-8000.asse.devtunnels.ms/users?email=${data.email}`);
         const existingUsers = await checkEmailRes.json();
         
         if (existingUsers.length > 0) {
@@ -45,7 +45,7 @@ function AuthModal({ onClose, onLogin }) {
         }
 
         // Dùng lệnh POST để lưu tài khoản mới vào file JSON
-        const response = await fetch('http://localhost:8000/users', {
+        const response = await fetch('https://lnpdp9rp-8000.asse.devtunnels.ms/users', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -53,7 +53,8 @@ function AuthModal({ onClose, onLogin }) {
           body: JSON.stringify({
             fullName: data.fullName,
             email: data.email,
-            password: data.password
+            password: data.password,
+            cart: data.cart
           })
         });
 

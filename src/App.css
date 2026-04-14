@@ -708,22 +708,69 @@ body {
 
  /* GIAO DIỆN ĐIỆN THOẠI */
 
+@media screen and (max-width: 1024px) {
+  .navbar {
+    padding: 1rem 2%; /* Bớt khoảng trống vô dụng ở 2 bên mép */
+  }
+  
+  .nav-links a {
+    margin: 0 0.5rem; /* Ép các đường link đứng sát vào nhau hơn */
+    font-size: 0.95rem;
+  }
+  
+  .cart-btn, .login-btn {
+    padding: 0.5rem 0.8rem; /* Thu nhỏ nút lại một chút */
+    font-size: 0.9rem;
+  }
+}
+
+/* --- 8.2. Màn hình nhỏ (Điện thoại: < 768px) --- */
 @media screen and (max-width: 768px) {
+  /* 1. Sắp xếp lại khối Navbar theo chiều dọc */
   .navbar {
     flex-direction: column;
     padding: 1rem;
-    gap: 1rem;
+    gap: 1rem; 
   }
 
+  /* 2. CHÌA KHÓA: Dùng GRID thay vì FLEX để chia 2 cột cứng */
   .nav-links {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Chia làm 2 cột độ rộng bằng nhau */
+    gap: 0.8rem; /* Khoảng cách giữa các nút */
+    width: 100%;
   }
 
+  /* 3. Trang trí các Link thành dạng nút bấm mobile */
   .nav-links a {
-    margin: 0.5rem;
+    margin: 0; 
     font-size: 0.95rem;
+    white-space: nowrap; /* Chống rớt chữ */
+    background-color: #f3f4f6; /* Nền xám nhạt */
+    padding: 0.6rem 0.5rem;
+    border-radius: 8px;
+    text-align: center; /* Căn giữa chữ */
+    font-weight: bold;
+  }
+
+  /* 4. Ép 2 nút Giỏ hàng và Đăng nhập bung rộng 100% */
+  .cart-btn, .login-btn {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    margin-top: 0.5rem;
+  }
+
+  /* ... CÁC ĐOẠN DƯỚI GIỮ NGUYÊN ... */
+  .user-profile {
+    width: 100%;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .logout-btn {
+    width: 100%;
+    text-align: center;
   }
 
   .banner {
@@ -747,12 +794,7 @@ body {
     width: 95%;
   }
 
-  .user-profile {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
   .checkout-layout {
-    flex-direction: column-reverse; /* Đẩy giỏ hàng lên trên form trên điện thoại */
+    flex-direction: column-reverse; 
   }
 }

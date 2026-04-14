@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Routes, Route, Link } from 'react-router-dom'; 
 import './App.css';
 
@@ -13,7 +13,13 @@ import ProductDetail from './Components/ProductDetail.jsx';
 import { GetProducts } from './data/Products.js';
 
 function App() {
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState(() => {
+    const savedCart = localStorage.getItem('techshop_cart');
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
+  useEffect(() => {
+    localStorage.setItem('techshop_cart', JSON.stringify(cartItems));
+  }, [cartItems]);
   const cartCount = cartItems.length;
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
@@ -25,8 +31,9 @@ function App() {
     alert(`Đã thêm "${product.name}" vào giỏ hàng thành công!`);
   };
 
-  const handleLoginSuccess = (userName) => {
-    setCurrentUser(userName); 
+const handleLoginSuccess = (user) => {
+    setCurrentUser(user);
+    setCartItems(user.cart || []);
   };
 
   const clearCart = () => {
@@ -34,9 +41,29 @@ function App() {
   };
 
   const handleLogout = () => {
-    setCurrentUser(null); 
-    alert("Bạn đã đăng xuất thành công!");
+    setCurrentUser(null);
+    setCartItems([]); // Xóa giỏ hàng trên máy khi thoát
+    localStorage.removeItem('techshop_cart');
+    alert("Bạn đã đăng xuất.");
   };
+
+  useEffect(() => {
+    // Chỉ đồng bộ khi đã đăng nhập và giỏ hàng có sự thay đổi
+    if (currentUser && currentUser.id) {
+      const syncCart = async () => {
+        try {
+          await fetch(`https://lnpdp9rp-8000.asse.devtunnels.ms/users/${currentUser.id}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ cart: cartItems })
+          });
+        } catch (error) {
+          console.error("Lỗi đồng bộ giỏ hàng:", error);
+        }
+      };
+      syncCart();
+    }
+  }, [cartItems, currentUser]);
 
   return (
     <div className="app-container">
@@ -55,7 +82,7 @@ function App() {
         </Link>
         {currentUser ? (
           <div className="user-profile">
-            <span className="user-name logout-btn has-tooltip" onClick={handleLogout} data-tooltip="Đăng xuất" >Chào, {currentUser}
+            <span className="user-name logout-btn has-tooltip" onClick={handleLogout} data-tooltip="Đăng xuất" >Chào, {currentUser.fullName}
             </span>
           </div>
         ) : (
