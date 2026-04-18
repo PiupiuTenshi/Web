@@ -6,7 +6,8 @@
     { id: 5, name: 'Bàn phím cơ Quang Học', price: '1.850.000₫', category: 'Phụ kiện', image: 'https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&w=500&q=60', description: 'Tốc độ phản hồi cực nhanh chỉ 0.2ms nhờ switch quang học, hệ thống LED RGB 16.8 triệu màu tùy chỉnh sinh động.' },
     { id: 6, name: 'Chuột Gaming Không Dây', price: '1.200.000₫', category: 'Phụ kiện', image: 'https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?auto=format&fit=crop&w=500&q=60', description: 'Trọng lượng siêu nhẹ, mắt đọc quang học độ phân giải cao 25.000 DPI, kết nối không dây độ trễ cực thấp.' },
     { id: 7, name: 'Tablet Pro 11 inch', price: '15.400.000₫', category: 'Máy tính bảng', image: 'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=500&q=60', description: 'Sức mạnh thay thế laptop với chip M-series, màn hình Liquid Retina sống động, hỗ trợ bút cảm ứng vẽ vời cực mượt.' },
-    { id: 8, name: 'Loa Bluetooth Bass Boost', price: '2.500.000₫', category: 'Âm thanh', image: 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=500&q=60', description: 'Âm bass bùng nổ, chống nước chuẩn IP67 thoải mái mang đi bơi hay dã ngoại, thời lượng pin lên đến 15 giờ liên tục.' }
+    { id: 8, name: 'Loa Bluetooth Bass Boost', price: '2.500.000₫', category: 'Âm thanh', image: 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=500&q=60', description: 'Âm bass bùng nổ, chống nước chuẩn IP67 thoải mái mang đi bơi hay dã ngoại, thời lượng pin lên đến 15 giờ liên tục.' },
+    
   ];
 
 export function GetProducts() {

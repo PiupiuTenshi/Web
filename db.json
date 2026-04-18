@@ -23,8 +23,35 @@
           "description": "Trải nghiệm tốc độ 5G siêu tốc, camera 108MP chụp đêm xuất sắc và dung lượng pin khủng 5000mAh dùng trọn cả ngày dài."
         }
       ]
+    },
+    {
+      "fullName": "K' Nguyễn Thụy Lynh",
+      "email": "lynhlynh20172017@gmail.com",
+      "password": "lynh1007",
+      "id": "gSpkkhM7afM",
+      "cart": []
     }
   ],
-  "orders": [],
+  "orders": [
+    {
+      "customerInfo": {
+        "fullName": "K' Nguyễn Thụy Lynh",
+        "address": "416/6/35M"
+      },
+      "items": [
+        {
+          "id": 3,
+          "name": "Tai nghe Bluetooth Noise Cancelling",
+          "price": "3.200.000₫",
+          "category": "Phụ kiện",
+          "image": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?auto=format&fit=crop&w=500&q=60",
+          "description": "Công nghệ chống ồn chủ động ANC hàng đầu, âm thanh Hi-Res chân thực và thiết kế công thái học đeo thoải mái suốt nhiều giờ."
+        }
+      ],
+      "totalAmount": 3200000,
+      "orderDate": "2026-04-14T12:14:01.493Z",
+      "id": "OSHSoFM_PK8"
+    }
+  ],
   "$schema": "./node_modules/json-server/schema.json"
 }

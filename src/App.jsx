@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, Link } from 'react-router-dom'; 
+import { Routes, Route, Link, useNavigate } from 'react-router-dom'; 
 import './App.css';
 
 import ProductsPage from './Page/ProductsPage.jsx'; 
@@ -13,10 +13,20 @@ import ProductDetail from './Components/ProductDetail.jsx';
 import { GetProducts } from './data/Products.js';
 
 function App() {
+  const navigate = useNavigate();
+  const [showCategory, setShowCategory] = useState(false);
+  const [activeCategory, setActiveCategory] = useState('All');
+  const handleCategoryClick = (categoryName) => {
+    setActiveCategory(categoryName); // Lưu lại tên danh mục vừa bấm
+    setShowCategory(false); // Ẩn cái menu đi
+    navigate('/products'); // Tự động lướt sang trang Danh sách sản phẩm
+  };
+
   const [cartItems, setCartItems] = useState(() => {
     const savedCart = localStorage.getItem('techshop_cart');
     return savedCart ? JSON.parse(savedCart) : [];
   });
+
   useEffect(() => {
     localStorage.setItem('techshop_cart', JSON.stringify(cartItems));
   }, [cartItems]);
@@ -68,9 +78,39 @@ const handleLoginSuccess = (user) => {
   return (
     <div className="app-container">
       <header className="navbar">
-        <Link to="/" className="logo" style={{ textDecoration: 'none' }}>
-          TechShop
-        </Link>
+        <div className="nav-left-group">
+          <Link to="/" className="logo-link">
+            TechShop
+          </Link>
+
+          {/* Khối chứa nút Hamburger và Dropdown */}
+          <div 
+            className="hamburger-container"
+            onMouseEnter={() => setShowCategory(true)}
+            onMouseLeave={() => setShowCategory(false)}
+          >
+            <button 
+              className="hamburger-btn"
+              onClick={() => setShowCategory(!showCategory)}
+            >
+              <span className="burger-icon">☰</span>
+              <span className="burger-text">Danh mục</span>
+            </button>
+
+          {showCategory && (
+              <div className="category-dropdown">
+                <div className="category-dropdown-content">
+                  <div onClick={() => handleCategoryClick('All')}>🌐 Tất cả sản phẩm</div>
+                  <div onClick={() => handleCategoryClick('Laptop')}>💻 Laptop</div>
+                  <div onClick={() => handleCategoryClick('Điện thoại')}>📱 Điện thoại</div>
+                  <div onClick={() => handleCategoryClick('Máy tính bảng')}>💊 Máy tính bảng</div>
+                  <div onClick={() => handleCategoryClick('Phụ kiện')}>🎧 Phụ kiện</div>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+    
         <nav className="nav-links">
           <Link to="/">Trang chủ</Link>
           <Link to="/products">Sản phẩm</Link>
@@ -99,7 +139,7 @@ const handleLoginSuccess = (user) => {
         />
         <Route 
           path="/products" 
-          element={<ProductsPage onAddToCart={handleAddToCart} />} 
+          element={<ProductsPage onAddToCart={handleAddToCart} activeCategory={activeCategory}/>} 
         />
         <Route 
           path="/cart" 

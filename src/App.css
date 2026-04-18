@@ -83,22 +83,38 @@ body {
 /* =========================================
    3. BỐ CỤC CHÍNH (HEADER & FOOTER)
    ========================================= */
+.nav-links a, 
+.login-btn, 
+.cart-btn,
+.cart-text {
+  white-space: nowrap; 
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.2rem 5%;
-  background-color: var(--white);
+  padding: 0.8rem 5%;
+  background: #ffffff;
   box-shadow: 0 2px 10px rgba(0,0,0,0.05);
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 1000;
+  height: 65px;
 }
 
-.logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: var(--primary-color);
+.nav-left-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+/* LOGO */
+.logo-link {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #2563eb;
+  text-decoration: none;
+  letter-spacing: -1px;
 }
 
 .nav-links a {
@@ -122,6 +138,7 @@ body {
   border: 1px solid var(--primary-color);
   border-radius: 5px;
   transition: all 0.3s ease;
+
 }
 
 .login-btn:hover {
@@ -141,6 +158,7 @@ body {
   display: flex;
   align-items: center;
   transition: all 0.3s ease;
+  margin-right: 10px;
 }
 
 .cart-btn:hover {
@@ -706,31 +724,106 @@ body {
   color: #10b981; /* Màu xanh lá cho tổng tiền */
 }
 
- /* GIAO DIỆN ĐIỆN THOẠI */
 
-@media screen and (max-width: 1024px) {
-  .navbar {
-    padding: 1rem 2%; /* Bớt khoảng trống vô dụng ở 2 bên mép */
-  }
-  
-  .nav-links a {
-    margin: 0 0.5rem; /* Ép các đường link đứng sát vào nhau hơn */
-    font-size: 0.95rem;
-  }
-  
-  .cart-btn, .login-btn {
-    padding: 0.5rem 0.8rem; /* Thu nhỏ nút lại một chút */
-    font-size: 0.9rem;
-  }
+/* Nút Danh Mục */
+.hamburger-container {
+  position: relative;
+}
+
+.hamburger-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f3f4f6;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #1f2937;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.hamburger-btn:hover {
+  background: #e5e7eb;
+}
+
+.burger-icon {
+  font-size: 1.2rem;
+}
+
+/* Bảng Dropdown xổ xuống */
+.category-dropdown {
+  position: absolute;
+  top: 100%; /* Đẩy xuống dưới nút một chút */
+  left: 0;
+  padding-top: 10px;
+  background-color: transparent;
+  min-width: 240px; /* Bảng to và rộng rãi */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: slideDownFade 0.2s ease-out;
+}
+
+.category-dropdown-content {
+  background-color: #ffffff;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #f3f4f6;
+}
+
+/* Kỹ thuật "Cầu nối tàng hình": Đảm bảo không có điểm chết khi di chuyển chuột */
+.category-dropdown::before {
+  content: "";
+  position: absolute;
+  top: -15px; /* Bắc cầu lên tận nút bấm */
+  left: 0;
+  width: 100%;
+  height: 20px;
+  background: transparent;
+}
+
+/* Sửa lại hover cho các item bên trong lớp nội dung */
+.category-dropdown-content div {
+  padding: 12px 20px;
+  font-size: 0.95rem;
+  color: #374151;
+  border-bottom: 1px solid #f3f4f6;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.category-dropdown-content div:hover {
+  background-color: #fef2f2;
+  color: #e11d48;
 }
 
 /* --- 8.2. Màn hình nhỏ (Điện thoại: < 768px) --- */
 @media screen and (max-width: 768px) {
   /* 1. Sắp xếp lại khối Navbar theo chiều dọc */
+  .desktop-only {
+    display: none; /* Ẩn bớt các link rườm rà trên mobile */
+  }
+
   .navbar {
+    /* 1. ÉP MÀU NỀN VÀ GHIM TRÊN CÙNG CHỐNG TRONG SUỐT */
+    background-color: #ffffff !important; 
+    position: -webkit-sticky !important; /* Hỗ trợ iPhone/Safari */
+    position: sticky !important;
+    top: 0;
+    z-index: 9999 !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Đổ bóng nhẹ để tách biệt với nội dung */
+
+    /* 2. Sắp xếp dọc như cũ của bạn */
     flex-direction: column;
     padding: 1rem;
     gap: 1rem; 
+
+    height: auto !important;
   }
 
   /* 2. CHÌA KHÓA: Dùng GRID thay vì FLEX để chia 2 cột cứng */
@@ -757,7 +850,7 @@ body {
   .cart-btn, .login-btn {
     width: 100%;
     justify-content: center;
-    text-align: center;
+    text-align:center ;
     margin-top: 0.5rem;
   }
 
@@ -797,4 +890,21 @@ body {
   .checkout-layout {
     flex-direction: column-reverse; 
   }
+
+  .burger-text {
+    display: none; /* Mobile chỉ hiện icon ☰ */
+  }
+
+  .cart-text {
+    display: none; 
+  }
+
+  .hamburger-btn {
+    padding: 8px;
+  }
+
+  .category-dropdown {
+    width: 250px;
+  }
 }
+
