@@ -1,6 +1,8 @@
 // File: src/components/AuthModal.jsx
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form'; // Import hook
+import { useForm } from 'react-hook-form'; 
+import { jwtDecode } from "jwt-decode";
+import { GoogleLogin } from '@react-oauth/google';
 
 function AuthModal({ onClose, onLogin }) {
   const [isLoginMode, setIsLoginMode] = useState(true);
@@ -12,8 +14,6 @@ function AuthModal({ onClose, onLogin }) {
     reset         // Dùng để xóa trắng form
   } = useForm();
 
-  // Hàm xử lý khi người dùng nhập đúng và bấm Submit
-  // Nhớ thêm chữ "async" trước (data) nhé
   const onSubmit = async (data) => {
     try {
       if (isLoginMode) {
@@ -67,6 +67,51 @@ function AuthModal({ onClose, onLogin }) {
     } catch (error) {
       console.error("Lỗi hệ thống:", error);
       alert("Không thể kết nối đến máy chủ. Bạn đã bật json-server chưa?");
+    }
+  };
+
+  // --- 2. XỬ LÝ ĐĂNG NHẬP / ĐĂNG KÝ TỰ ĐỘNG BẰNG GOOGLE ---
+  const handleGoogleSuccess = async (credentialResponse) => {
+    try {
+      // Dịch mã JWT Google gửi về để lấy Tên và Email
+      const decoded = jwtDecode(credentialResponse.credential);
+      const { email, name } = decoded;
+
+      // Kiểm tra xem email này đã từng đăng nhập vào TechShop chưa
+      const checkRes = await fetch(`https://lnpdp9rp-8000.asse.devtunnels.ms/users?email=${email}`);
+      const existingUsers = await checkRes.json();
+
+      if (existingUsers.length > 0) {
+        // TRƯỜNG HỢP 1: ĐÃ CÓ TÀI KHOẢN -> Cho đăng nhập luôn
+        const loggedInUser = existingUsers[0];
+        alert(`Chào mừng ${loggedInUser.fullName} quay trở lại qua Google!`);
+        onLogin(loggedInUser);
+        onClose();
+      } else {
+        // TRƯỜNG HỢP 2: CHƯA CÓ TÀI KHOẢN -> Tự động tạo và lưu vào json-server
+        const newUser = {
+          fullName: name,
+          email: email,
+          password: "google_account", // Ghi chú đây là acc Google để khỏi check pass
+          cart: []
+        };
+
+        const postRes = await fetch('https://lnpdp9rp-8000.asse.devtunnels.ms/users', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(newUser)
+        });
+
+        if (postRes.ok) {
+          const createdUser = await postRes.json();
+          alert(`Tạo tài khoản Google thành công! Chào mừng ${createdUser.fullName}`);
+          onLogin(createdUser);
+          onClose();
+        }
+      }
+    } catch (error) {
+      console.error("Lỗi xác thực Google:", error);
+      alert("Kết nối máy chủ thất bại khi đăng nhập Google.");
     }
   };
 
@@ -138,6 +183,23 @@ function AuthModal({ onClose, onLogin }) {
             {isLoginMode ? 'Đăng Nhập' : 'Đăng Ký'}
           </button>
         </form>
+
+        {/* --- KHU VỰC NÚT ĐĂNG NHẬP GOOGLE --- */}
+        <div className="google-login-container">
+          <p className="google-login-text">
+            hoặc tiếp tục với
+          </p>
+          <div className="google-login-wrapper">
+            <GoogleLogin
+              onSuccess={handleGoogleSuccess}
+              onError={() => {
+                console.log('Đăng nhập Google thất bại');
+              }}
+              shape="rectangular"
+              text="signin_with"
+            />
+          </div>
+        </div>
 
         <p className="toggle-mode">
           {isLoginMode ? 'Chưa có tài khoản? ' : 'Đã có tài khoản? '}

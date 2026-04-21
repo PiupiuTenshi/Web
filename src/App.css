@@ -193,6 +193,23 @@ body {
   color: white;
 }
 
+/* --- Khu vực Đăng nhập Google --- */
+.google-login-container {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.google-login-text {
+  margin: 10px 0;
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+.google-login-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
 .footer {
   text-align: center;
   padding: 2rem;
@@ -427,6 +444,17 @@ body {
   border-radius: 8px;
 }
 
+.products-page-container {
+  padding-top: 2rem;
+}
+
+.loading-message {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.2rem;
+  color: #6b7280;
+}
+
 /* =========================================
    6. TRANG GIỎ HÀNG
    ========================================= */
@@ -531,7 +559,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 99999;
   backdrop-filter: blur(3px);
 }
 

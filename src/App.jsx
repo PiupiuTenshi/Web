@@ -122,7 +122,7 @@ const handleLoginSuccess = (user) => {
         </Link>
         {currentUser ? (
           <div className="user-profile">
-            <span className="user-name logout-btn has-tooltip" onClick={handleLogout} data-tooltip="Đăng xuất" >Chào, {currentUser.fullName}
+            <span className="user-name logout-btn has-tooltip" onClick={handleLogout} data-tooltip="Đăng xuất" >Chào, {currentUser.fullName.trim().split(' ').pop()}
             </span>
           </div>
         ) : (
@@ -135,7 +135,7 @@ const handleLoginSuccess = (user) => {
       <Routes>
         <Route 
           path="/" 
-          element={<HomePage products={featuredProducts} onAddToCart={handleAddToCart} />} 
+          element={<HomePage onAddToCart={handleAddToCart} />} 
         />
         <Route 
           path="/products" 
