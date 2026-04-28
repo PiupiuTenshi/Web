@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "0uduydnWi+k=",
+  "dgSpecHash": "YaaX93YYKA8=",
   "success": true,
   "projectFilePath": "D:\\Learn\\Web\\WEBSITE\\tech-shop\\TechShopBackend\\TechShopBackend.csproj",
   "expectedPackageFiles": [
@@ -54,15 +54,5 @@
     "C:\\Users\\TenshiPiupiu\\.nuget\\packages\\system.security.cryptography.pkcs\\9.0.4\\system.security.cryptography.pkcs.9.0.4.nupkg.sha512",
     "C:\\Users\\TenshiPiupiu\\.nuget\\packages\\system.security.cryptography.protecteddata\\9.0.4\\system.security.cryptography.protecteddata.9.0.4.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1900",
-      "level": "Warning",
-      "message": "Error occurred while getting package vulnerability data: Unable to load the service index for source https://api.nuget.org/v3/index.json.",
-      "projectPath": "D:\\Learn\\Web\\WEBSITE\\tech-shop\\TechShopBackend\\TechShopBackend.csproj",
-      "warningLevel": 1,
-      "filePath": "D:\\Learn\\Web\\WEBSITE\\tech-shop\\TechShopBackend\\TechShopBackend.csproj",
-      "targetGraphs": []
-    }
-  ]
+  "logs": []
 }
