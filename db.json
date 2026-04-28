@@ -1,0 +1,143 @@
+{
+  "users": [
+    {
+      "fullName": "Phạm Minh Sáng",
+      "email": "sang62375@gmail.com",
+      "password": "Iloveyou1207",
+      "id": "JHuonVt3bJE",
+      "cart": []
+    },
+    {
+      "fullName": "K' Nguyễn Thụy Lynh",
+      "email": "lynhlynh20172017@gmail.com",
+      "password": "lynh1007",
+      "id": "gSpkkhM7afM",
+      "cart": []
+    },
+    {
+      "fullName": "Sáng Phạm Minh",
+      "email": "italone1207@gmail.com",
+      "password": "google_account",
+      "cart": [],
+      "id": "m5NinLy4tHw"
+    }
+  ],
+  "orders": [
+    {
+      "customerInfo": {
+        "fullName": "K' Nguyễn Thụy Lynh",
+        "address": "416/6/35M"
+      },
+      "items": [
+        {
+          "id": 3,
+          "name": "Tai nghe Bluetooth Noise Cancelling",
+          "price": "3.200.000₫",
+          "category": "Phụ kiện",
+          "image": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?auto=format&fit=crop&w=500&q=60",
+          "description": "Công nghệ chống ồn chủ động ANC hàng đầu, âm thanh Hi-Res chân thực và thiết kế công thái học đeo thoải mái suốt nhiều giờ."
+        }
+      ],
+      "totalAmount": 3200000,
+      "orderDate": "2026-04-14T12:14:01.493Z",
+      "id": "OSHSoFM_PK8"
+    },
+    {
+      "customerInfo": {
+        "fullName": "c",
+        "address": "cx"
+      },
+      "items": [
+        {
+          "id": 1,
+          "name": "Laptop Gaming Pro X",
+          "price": "25.990.000₫",
+          "category": "Laptop",
+          "image": "https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&w=500&q=60",
+          "description": "Cấu hình siêu khủng với vi xử lý thế hệ mới nhất, card đồ họa rời mạnh mẽ giúp bạn chiến mượt mọi tựa game AAA. Màn hình 144Hz chuẩn màu thiết kế."
+        }
+      ],
+      "totalAmount": 25990000,
+      "orderDate": "2026-04-18T07:43:30.846Z",
+      "id": "6x6vrnrkUtk"
+    },
+    {
+      "customerInfo": {
+        "fullName": {
+          "fullName": "Phạm Minh Sáng",
+          "email": "sang62375@gmail.com",
+          "password": "Iloveyou1207",
+          "id": "JHuonVt3bJE",
+          "cart": [
+            {
+              "id": 1,
+              "name": "Laptop Gaming Pro X",
+              "price": "25.990.000₫",
+              "category": "Laptop",
+              "image": "https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&w=500&q=60",
+              "description": "Cấu hình siêu khủng với vi xử lý thế hệ mới nhất, card đồ họa rời mạnh mẽ giúp bạn chiến mượt mọi tựa game AAA. Màn hình 144Hz chuẩn màu thiết kế."
+            },
+            {
+              "id": 2,
+              "name": "Smartphone Ultra 5G",
+              "price": "18.500.000₫",
+              "category": "Điện thoại",
+              "image": "https://images.unsplash.com/photo-1688762473728-3a20023e1fe4?auto=format&fit=crop&w=500&q=60",
+              "description": "Trải nghiệm tốc độ 5G siêu tốc, camera 108MP chụp đêm xuất sắc và dung lượng pin khủng 5000mAh dùng trọn cả ngày dài."
+            }
+          ]
+        },
+        "address": "a"
+      },
+      "items": [
+        {
+          "id": 1,
+          "name": "Laptop Gaming Pro X",
+          "price": "25.990.000₫",
+          "category": "Laptop",
+          "image": "https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&w=500&q=60",
+          "description": "Cấu hình siêu khủng với vi xử lý thế hệ mới nhất, card đồ họa rời mạnh mẽ giúp bạn chiến mượt mọi tựa game AAA. Màn hình 144Hz chuẩn màu thiết kế."
+        },
+        {
+          "id": 2,
+          "name": "Smartphone Ultra 5G",
+          "price": "18.500.000₫",
+          "category": "Điện thoại",
+          "image": "https://images.unsplash.com/photo-1688762473728-3a20023e1fe4?auto=format&fit=crop&w=500&q=60",
+          "description": "Trải nghiệm tốc độ 5G siêu tốc, camera 108MP chụp đêm xuất sắc và dung lượng pin khủng 5000mAh dùng trọn cả ngày dài."
+        }
+      ],
+      "totalAmount": 44490000,
+      "orderDate": "2026-04-18T07:47:34.128Z",
+      "id": "CqAyNNy97Qg"
+    },
+    {
+      "customerInfo": {
+        "fullName": "Sáng",
+        "address": "12345"
+      },
+      "items": [
+        {
+          "id": 1,
+          "name": "Laptop Gaming Pro X",
+          "price": "25.990.000₫",
+          "category": "Laptop",
+          "image": "https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&w=500&q=60",
+          "description": "Cấu hình siêu khủng với vi xử lý thế hệ mới nhất, card đồ họa rời mạnh mẽ giúp bạn chiến mượt mọi tựa game AAA. Màn hình 144Hz chuẩn màu thiết kế."
+        },
+        {
+          "id": 2,
+          "name": "Smartphone Ultra 5G",
+          "price": "18.500.000₫",
+          "category": "Điện thoại",
+          "image": "https://images.unsplash.com/photo-1688762473728-3a20023e1fe4?auto=format&fit=crop&w=500&q=60",
+          "description": "Trải nghiệm tốc độ 5G siêu tốc, camera 108MP chụp đêm xuất sắc và dung lượng pin khủng 5000mAh dùng trọn cả ngày dài."
+        }
+      ],
+      "totalAmount": 44490000,
+      "orderDate": "2026-04-18T08:58:53.367Z",
+      "id": "OUBnIIcG-dA"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

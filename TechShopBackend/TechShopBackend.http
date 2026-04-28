@@ -1,0 +1,6 @@
+@TechShopBackend_HostAddress = http://localhost:5281
+
+GET http://localhost:5281/api/products
+Accept: application/json
+
+###
