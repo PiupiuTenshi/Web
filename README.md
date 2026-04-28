@@ -248,5 +248,3 @@ tech-shop/
 - **Họ tên:** Sáng Phạm Minh
 - **Chuyên ngành:** Kỹ thuật xét nghiệm y học & Kỹ thuật phần mềm (PTIT)
 ```
-
-Với cấu trúc này, bạn có thể tự tin quản lý dự án TechShop một cách khoa học nhất rồi đấy! Bạn còn muốn mình bổ sung thêm phần nào vào tài liệu này không?
